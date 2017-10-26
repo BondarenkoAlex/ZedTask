@@ -1,0 +1,23 @@
+:local(.buttonBg) {
+  padding: 13px 30px;
+  border-radius: 2px;
+  background-color: rgb(0, 170, 135);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  border: 0 solid transparent;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+:local(.buttonBg):hover {
+  background-color: rgb(0, 129, 108);
+}
+
+:local(.buttonBg):active {
+  background-color: rgb(0, 130, 108);
+}
