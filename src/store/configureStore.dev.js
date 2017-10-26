@@ -5,19 +5,16 @@ import {
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
+import { loadingBarMiddleware } from 'react-redux-loading-bar';
 
 const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 });
 
-// Create a history of your choosing (we're using a browser history in this case)
-// const history = createHistory();
-
-// Build the middleware for intercepting and dispatching navigation actions
-// const routermiddleware = routerMiddleware(history);
-
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk),
+  applyMiddleware(thunk, loadingBarMiddleware({
+    promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE'],
+  })),
 );
 
 export default function configureStore(initialState) {

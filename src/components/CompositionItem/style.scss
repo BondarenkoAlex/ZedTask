@@ -1,0 +1,23 @@
+:local(.composition) {
+  text-align: left;
+}
+
+:local(.wrapImg) {
+  display: inline-block;
+  width: 120px;
+  height: 90px;
+}
+
+:local(.wrapContent) {
+  display: inline-block;
+  width: 450px;
+  vertical-align: top;
+  margin-left: 10px;
+
+  header h3, div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+

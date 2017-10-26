@@ -8,7 +8,7 @@ function ContentWindow(props) {
   return (
     <section className={style.dialogWindow}>
       <header>
-        <h3>{title}</h3>
+        <h1>{title}</h1>
       </header>
       <article>
         {React.Children.map(children, child => child)}

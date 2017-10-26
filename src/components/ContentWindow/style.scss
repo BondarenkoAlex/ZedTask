@@ -7,9 +7,12 @@
   padding: 24px;
   display: inline-block;
   vertical-align: middle;
+  max-height: 80%;
+  overflow: auto;
 
   header {
     position: relative;
+    text-transform: uppercase;
   }
 }
 

@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import App from '../components/App';
 import Button from '../components/Button';
 import ModalWindow from '../components/ModalWindow';
 import ContentWindow from '../components/ContentWindow';
+import CompositionItem from '../components/CompositionItem';
 import { compositionsSelector } from '../selectors';
+import LoadingBar from 'react-redux-loading-bar';
 import {
   loadCompositionsIfNeed,
   isOpenWindowToggle,
@@ -45,28 +48,42 @@ class AppContainer extends Component {
   }
 
   onTogglePopup() {
+    // можно загружать при клике, но это, наверное, не лучший способ.
+    // this.props.loadCompositionsIfNeed();
     this.props.isOpenWindowToggle();
   }
 
   render() {
     const { title, compositions, isOpenWindow } = this.props;
+    const isShow = isOpenWindow && !compositions.isFetching;
+    const isError = compositions.error !== null;
     return (
-      <div>
+      <App>
+        <LoadingBar />
+        <br />
         <Button onClick={this.onTogglePopup}>Popup</Button>
-        {isOpenWindow && (
+        {isShow && (
           <ModalWindow
             onClick={this.onTogglePopup}
           >
             <ContentWindow
               title={title}
             >
-              {compositions.items.map(item => (
-                <div key={item.id}>{item.title}</div>
-              ))}
+              {isError
+                ? compositions.error
+                : compositions.items.map(item => (
+                  <CompositionItem
+                    key={item.id}
+                    src={item.thumbnails.default.url}
+                    title={item.title}
+                    description={item.description}
+                  />
+                ))
+              }
             </ContentWindow>
           </ModalWindow>)
         }
-      </div>
+      </App>
     );
   }
 }
@@ -95,3 +112,5 @@ const mapDispatchToProps = dispatch => (
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+
+/* <div key={item.id}>{item.title}</div> */
